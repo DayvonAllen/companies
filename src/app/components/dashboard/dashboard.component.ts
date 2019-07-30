@@ -28,8 +28,9 @@ export class DashboardComponent implements OnInit {
         this.WorkersList = data;
       });
     });
-    this.workOrder.getWorkOrder().subscribe(data => {
-      data["orders"].map(order => {
+    await this.workOrder.getWorkOrder().then(data => {
+      data.subscribe(data => {
+        data["orders"].map(order => {
           this.WorkersList.map(worker => {
             console.log(worker.id);
             console.log(order["workerId"]);
@@ -42,7 +43,8 @@ export class DashboardComponent implements OnInit {
               });
             }
           });
-        this.sortFunction();
+          this.sortFunction();
+        });
       });
     });
   }

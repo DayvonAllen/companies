@@ -2,6 +2,7 @@
 
 *{
     font-family: 'Raleway', sans-serif;
+    overflow-y:hidden;
 }
 
 #body{
@@ -70,19 +71,42 @@ img{
    }
 }
 @media(max-width: 800px){
+    #body{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    img{
+        width: 100px;
+    }
+    #card{
+        width: 100%;
+    }
     #top{
         text-align: center;
         margin-bottom: .7rem;
     }
-    
-    #left {
-        margin-left: 3rem;
+
+    #top small {
+        font-size: .6rem;
     }
     
+    #left {
+        margin-left: 1.5rem;
+    }
+    #right p{
+        font-size: .65rem;
+    }
+    #right{
+        margin-top: .7rem;
+        margin-left: .8rem;
+    }
     #time{
         margin-top: 1.5rem;
         text-align: right;
         margin-right: .7rem;
+    }
+    #time small {
+        font-size: .7rem;
     }
     
     img{
