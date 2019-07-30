@@ -10,6 +10,6 @@ export class WorkOrderService {
   constructor(private http: HttpClient) { }
 //makes an api call
   getWorkOrder(){
-    return this.http.get('https://www.hatchways.io/api/assessment/work_orders')
+    return this.http.get('http://localhost:3000/work-order');
   }
 }

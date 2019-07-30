@@ -8,7 +8,7 @@ export class WorkerService {
 
   constructor(private http: HttpClient) { }
 //makes an api call use a url parameter
-  async getWorker(id){
-    return  this.http.get(`https://www.hatchways.io/api/assessment/workers/${id}`);
+  async getWorker(){
+    return this.http.get('http://localhost:3000/workers');
   }
 }
