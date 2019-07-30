@@ -1,0 +1,36 @@
+<div id="body">
+  <div id="filter">
+    <input type="text" id="search" placeholder="Filter By Name" [(ngModel)]="search">
+  </div>
+  <div id="toggle">
+    <!-- Displays a the different buttons depending on whether or not it's been clicked or not -->
+    <mat-slide-toggle *ngIf="first === true; else reverse" (click)="toggle()">Latest First</mat-slide-toggle>
+    <ng-template #reverse>
+      <mat-slide-toggle (click)="toggle()" [checked]="true">Earliest First</mat-slide-toggle>
+    </ng-template>
+  </div>
+  <div id="container">
+    <!-- Get the list of  employees and companies and displays them in a card -->
+    <mat-card id="card" *ngFor="let worker of Workers | filterSearch: search">
+      <div id="top">
+        <small>Worker Order {{worker.id}}</small>
+        <br>
+        <br>
+        <small>{{worker.description}}</small>
+      </div>
+      <div id="main">
+        <div id="left">
+          <img src={{worker.image}} alt="dummy photo">
+        </div>
+        <div id="right">
+          <p>{{worker.fullName}}</p>
+          <p>{{worker.companyName}}</p>
+          <p>{{worker.email}}</p>
+        </div>
+      </div>
+      <div id="time">
+        <small>{{worker.deadline | date:'medium'}}</small>
+      </div>
+    </mat-card>
+  </div>
+</div>
