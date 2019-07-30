@@ -10,6 +10,6 @@ export class WorkOrderService {
   constructor(private http: HttpClient) { }
 //makes an api call
   getWorkOrder(){
-    return this.http.get('http://localhost:3000/work-order');
+    return this.http.get('https://companies-api123.herokuapp.com/work-order');
   }
 }

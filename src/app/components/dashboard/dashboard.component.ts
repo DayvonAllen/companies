@@ -10,7 +10,6 @@ export class DashboardComponent implements OnInit {
   work = [];
   Workers = [];
   WorkersList: any;
-  counter = [0, 1, 2, 3, 4];
   name;
   sorted = [];
   first = true;
@@ -24,14 +23,13 @@ export class DashboardComponent implements OnInit {
 
   async ngOnInit() {
     //gets the two different apis and combines them based on the ID.
-    // await this.consumeAPI(this.work);
     await this.worker.getWorker().then(data => {
       data.subscribe(data => {
         this.WorkersList = data;
       });
     });
     this.workOrder.getWorkOrder().subscribe(data => {
-      data['orders'].map(order => {
+      data["orders"].map(order => {
           this.WorkersList.map(worker => {
             console.log(worker.id);
             console.log(order["workerId"]);
@@ -44,7 +42,6 @@ export class DashboardComponent implements OnInit {
               });
             }
           });
-       
         this.sortFunction();
       });
     });
@@ -65,14 +62,4 @@ export class DashboardComponent implements OnInit {
     this.first = !this.first;
     this.sortFunction();
   }
-  // //gathers the api data in puts it in an array
-  // async consumeAPI(data) {
-  //   await this.counter.map(num => {
-  //     this.worker.getWorker(num).then(data => {
-  //       data.subscribe(worker => {
-  //         this.WorkersList.push(worker['worker'])
-  //       })
-  //     })
-  //   })
-  // }
 }

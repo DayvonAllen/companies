@@ -9,6 +9,6 @@ export class WorkerService {
   constructor(private http: HttpClient) { }
 //makes an api call use a url parameter
   async getWorker(){
-    return this.http.get('http://localhost:3000/workers');
+    return this.http.get('https://companies-api123.herokuapp.com/workers');
   }
 }
