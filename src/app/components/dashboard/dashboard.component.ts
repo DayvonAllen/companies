@@ -26,7 +26,6 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
     //gets the two different apis and combines them based on the ID.
      this.getInfo();
-
   }
 
   async getInfo() {
@@ -37,11 +36,8 @@ export class DashboardComponent implements OnInit {
     });
     await this.workOrder.getWorkOrder().then(data => {
       data.subscribe(data => {
-        console.log(data);
         data["orders"].map(order => {
            this.WorkersList.map(worker => {
-            console.log(worker.id);
-            console.log(order["workerId"]);
             if (worker.id === order["workerId"]) {
               this.name = worker.name;
               this.Workers.push({
