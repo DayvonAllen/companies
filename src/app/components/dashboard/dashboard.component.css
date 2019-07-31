@@ -70,7 +70,7 @@ img{
         grid-template-columns: 1fr;
    }
 }
-@media(max-width: 800px){
+@media(max-width: 760px){
     #body{
         display: grid;
         grid-template-columns: 1fr;
@@ -87,14 +87,14 @@ img{
     }
 
     #top small {
-        font-size: .6rem;
+        font-size: .4rem;
     }
     
     #left {
         margin-left: 1.5rem;
     }
     #right p{
-        font-size: .65rem;
+        font-size: .4rem;
     }
     #right{
         margin-top: .7rem;
@@ -106,7 +106,7 @@ img{
         margin-right: .7rem;
     }
     #time small {
-        font-size: .7rem;
+        font-size: .55rem;
     }
     
     img{

@@ -19,19 +19,27 @@ export class DashboardComponent implements OnInit {
   constructor(
     private workOrder: WorkOrderService,
     private worker: WorkerService
-  ) {}
+  ) {
+    this.getInfo();
+  }
 
   async ngOnInit() {
     //gets the two different apis and combines them based on the ID.
+     this.getInfo();
+
+  }
+
+  async getInfo() {
     await this.worker.getWorker().then(data => {
       data.subscribe(data => {
-        this.WorkersList = data;
+         this.WorkersList = data;
       });
     });
     await this.workOrder.getWorkOrder().then(data => {
       data.subscribe(data => {
+        console.log(data);
         data["orders"].map(order => {
-          this.WorkersList.map(worker => {
+           this.WorkersList.map(worker => {
             console.log(worker.id);
             console.log(order["workerId"]);
             if (worker.id === order["workerId"]) {
@@ -50,7 +58,6 @@ export class DashboardComponent implements OnInit {
   }
 
   //sorts the array by date and time
-
   sortFunction() {
     if (this.first) {
       this.sorted = this.Workers.sort((a, b) => a.deadline - b.deadline);
