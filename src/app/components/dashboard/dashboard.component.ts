@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { WorkOrderService } from "../../services/work-order.service";
 import { WorkerService } from "../../services/worker.service";
+import { from, of } from "rxjs";
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
@@ -19,38 +20,43 @@ export class DashboardComponent implements OnInit {
   constructor(
     private workOrder: WorkOrderService,
     private worker: WorkerService
-  ) {
-    this.getInfo();
-  }
+  ) {}
 
   async ngOnInit() {
     //gets the two different apis and combines them based on the ID.
-     this.getInfo();
+    this.getInfo();
   }
 
-  async getInfo() {
-    await this.worker.getWorker().then(data => {
+  getInfo() {
+    this.worker.getWorker().subscribe(data => {
       data.subscribe(data => {
-         this.WorkersList = data;
+        this.WorkersList = data;
+        this.getPeople();
       });
     });
-    await this.workOrder.getWorkOrder().then(data => {
-      data.subscribe(data => {
-        data["orders"].map(order => {
-           this.WorkersList.map(worker => {
-            if (worker.id === order["workerId"]) {
-              this.name = worker.name;
-              this.Workers.push({
-                fullName: this.name,
-                ...worker,
-                ...order
-              });
-            }
+  }
+
+  getPeople() {
+    if (this.WorkersList !== undefined) {
+      this.workOrder.getWorkOrder().subscribe(data => {
+        console.log(data);
+        data.subscribe(data => {
+          data["orders"].map(order => {
+            this.WorkersList.map(worker => {
+              if (worker.id === order["workerId"]) {
+                this.name = worker.name;
+                this.Workers.push({
+                  fullName: this.name,
+                  ...worker,
+                  ...order
+                });
+              }
+            });
+            this.sortFunction();
           });
-          this.sortFunction();
         });
       });
-    });
+    }
   }
 
   //sorts the array by date and time
